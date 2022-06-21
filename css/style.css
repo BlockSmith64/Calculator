@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.numbers {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 150px;
+}
+
+.btns {
+  display: flex;
+}
+
+.btn {
+  width: 45px;
+}
+
+.operator-btns {
+  display: flex;
+  flex-direction: column;
+}
