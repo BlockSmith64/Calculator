@@ -157,6 +157,7 @@ btnAllClear.addEventListener("click", function () {
   inputValue = "";
   value1 = "";
   display.value = "";
+  operation = "";
 });
 
 // btnDel.addEventListener("click", function(){
