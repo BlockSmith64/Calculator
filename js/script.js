@@ -1,3 +1,4 @@
+//Button selectors
 const btnOne = document.querySelector(".num-1");
 const btnTwo = document.querySelector(".num-2");
 const btnThree = document.querySelector(".num-3");
@@ -14,13 +15,16 @@ const btnSubtract = document.querySelector(".subtract");
 const btnMultiply = document.querySelector(".multiply");
 const btnDivide = document.querySelector(".divide");
 const btnEquals = document.querySelector(".equal");
+const btnAllClear = document.querySelector(".ac");
+const btnDel = document.querySelector(".del");
 
+//arithmetic functions
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let displayValue = "";
+let inputValue = "";
 let value1;
 let value2;
 let result;
@@ -38,79 +42,123 @@ const operate = function (operator, a, b) {
 };
 
 btnOne.addEventListener("click", function () {
-  displayValue += 1;
-  display.value = displayValue;
+  inputValue += 1;
+  display.value = inputValue;
 });
 
 btnTwo.addEventListener("click", function () {
-  displayValue += 2;
-  display.value = displayValue;
+  inputValue += 2;
+  display.value = inputValue;
 });
 btnThree.addEventListener("click", function () {
-  displayValue += 3;
-  display.value = displayValue;
+  inputValue += 3;
+  display.value = inputValue;
 });
 btnFour.addEventListener("click", function () {
-  displayValue += 4;
-  display.value = displayValue;
+  inputValue += 4;
+  display.value = inputValue;
 });
 btnFive.addEventListener("click", function () {
-  displayValue += 5;
-  display.value = displayValue;
+  inputValue += 5;
+  display.value = inputValue;
 });
 btnSix.addEventListener("click", function () {
-  displayValue += 6;
-  display.value = displayValue;
+  inputValue += 6;
+  display.value = inputValue;
 });
 btnSeven.addEventListener("click", function () {
-  displayValue += 7;
-  display.value = displayValue;
+  inputValue += 7;
+  display.value = inputValue;
 });
 btnEight.addEventListener("click", function () {
-  displayValue += 8;
-  display.value = displayValue;
+  inputValue += 8;
+  display.value = inputValue;
 });
 btnNine.addEventListener("click", function () {
-  displayValue += 9;
-  display.value = displayValue;
+  inputValue += 9;
+  display.value = inputValue;
 });
 btnZero.addEventListener("click", function () {
-  displayValue += 0;
-  display.value = displayValue;
+  inputValue += 0;
+  display.value = inputValue;
 });
 
 btnSubtract.addEventListener("click", function () {
-  value1 = displayValue;
-  displayValue = "";
-  display.value = displayValue;
+  result = operate(operation, Number(value1), Number(inputValue));
+  if (result) {
+    display.value = result;
+    value1 = result;
+  } else {
+    display.value = "";
+    value1 = inputValue;
+  }
+  inputValue = "";
+  //display.value = inputValue;
   operation = subtract;
 });
 
 btnMultiply.addEventListener("click", function () {
-  value1 = displayValue;
-  displayValue = "";
-  display.value = displayValue;
+  result = operate(operation, Number(value1), Number(inputValue));
+  if (result || result === 0) {
+    display.value = result;
+    value1 = result;
+  } else {
+    display.value = "";
+    value1 = inputValue;
+  }
+  inputValue = "";
+  // display.value = inputValue;
   operation = multiply;
 });
 
 btnDivide.addEventListener("click", function () {
-  value1 = displayValue;
-  displayValue = "";
-  display.value = displayValue;
+  result = operate(operation, Number(value1), Number(inputValue));
+  if (result) {
+    display.value = result;
+    value1 = result;
+  } else {
+    display.value = "";
+    value1 = inputValue;
+  }
+  inputValue = "";
+  //display.value = inputValue;
   operation = divide;
 });
 btnAdd.addEventListener("click", function () {
-  value1 = displayValue;
-  displayValue = "";
-  display.value = displayValue;
+  result = operate(operation, Number(value1), Number(inputValue));
+  if (result) {
+    display.value = result;
+    value1 = result;
+  } else {
+    display.value = "";
+    value1 = inputValue;
+  }
+  inputValue = "";
+  //display.value = inputValue;
   operation = add;
 });
 
 btnEquals.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(displayValue));
-  console.log(result);
-  display.value = result;
-  displayValue = "";
+  result = operate(operation, Number(value1), Number(inputValue));
+  if (result) {
+    display.value = result;
+    value1 = result;
+  } else if (result === 0) {
+    display.value = value1;
+  } else {
+    display.value = "";
+  }
+  inputValue = "";
   operation = "";
-  value1 = result;
+  console.log(value1, inputValue);
 });
+
+btnAllClear.addEventListener("click", function () {
+  inputValue = "";
+  value1 = "";
+  display.value = "";
+});
+
+// btnDel.addEventListener("click", function(){
+
+// })
