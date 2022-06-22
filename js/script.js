@@ -17,6 +17,7 @@ const btnDivide = document.querySelector(".divide");
 const btnEquals = document.querySelector(".equal");
 const btnAllClear = document.querySelector(".ac");
 const btnDel = document.querySelector(".del");
+const BtnDecimal = document.querySelector(".decimal");
 
 //arithmetic functions
 const add = (a, b) => a + b;
@@ -146,7 +147,7 @@ btnEquals.addEventListener("click", function () {
   } else if (result === 0) {
     display.value = value1;
   } else {
-    display.value = "";
+    display.value = inputValue;
   }
   inputValue = "";
   operation = "";
@@ -158,8 +159,16 @@ btnAllClear.addEventListener("click", function () {
   value1 = "";
   display.value = "";
   operation = "";
+  result = "";
 });
 
-// btnDel.addEventListener("click", function(){
+BtnDecimal.addEventListener("click", function () {
+  if (!inputValue.split("").includes(".")) {
+    inputValue += ".";
+    display.value = inputValue;
+  }
+});
 
-// })
+// btnDel.addEventListener("click", function () {
+
+// });
