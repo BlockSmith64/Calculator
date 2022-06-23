@@ -1,16 +1,7 @@
 "use strict";
 
 //Button selectors
-const btnOne = document.querySelector(".num-1");
-const btnTwo = document.querySelector(".num-2");
-const btnThree = document.querySelector(".num-3");
-const btnFour = document.querySelector(".num-4");
-const btnFive = document.querySelector(".num-5");
-const btnSix = document.querySelector(".num-6");
-const btnSeven = document.querySelector(".num-7");
-const btnEight = document.querySelector(".num-8");
-const btnNine = document.querySelector(".num-9");
-const btnZero = document.querySelector(".num-0");
+const numBtns = document.querySelectorAll(".num");
 const display = document.querySelector("input");
 const btnAdd = document.querySelector(".add");
 const btnSubtract = document.querySelector(".subtract");
@@ -45,47 +36,13 @@ const operate = function (operator, a, b) {
   }
 };
 
-btnOne.addEventListener("click", function () {
-  currentValue += 1;
-  display.value = currentValue;
-});
-
-btnTwo.addEventListener("click", function () {
-  currentValue += 2;
-  display.value = currentValue;
-});
-btnThree.addEventListener("click", function () {
-  currentValue += 3;
-  display.value = currentValue;
-});
-btnFour.addEventListener("click", function () {
-  currentValue += 4;
-  display.value = currentValue;
-});
-btnFive.addEventListener("click", function () {
-  currentValue += 5;
-  display.value = currentValue;
-});
-btnSix.addEventListener("click", function () {
-  currentValue += 6;
-  display.value = currentValue;
-});
-btnSeven.addEventListener("click", function () {
-  currentValue += 7;
-  display.value = currentValue;
-});
-btnEight.addEventListener("click", function () {
-  currentValue += 8;
-  display.value = currentValue;
-});
-btnNine.addEventListener("click", function () {
-  currentValue += 9;
-  display.value = currentValue;
-});
-btnZero.addEventListener("click", function () {
-  currentValue += 0;
-  display.value = currentValue;
-});
+numBtns.forEach((btn) =>
+  btn.addEventListener("click", function () {
+    currentValue += btn.textContent;
+    display.value = currentValue;
+    console.log("yo");
+  })
+);
 
 const opStatus = function () {
   if (value1 && currentValue) {
