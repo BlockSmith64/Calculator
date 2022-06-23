@@ -1,3 +1,5 @@
+"use strict";
+
 //Button selectors
 const btnOne = document.querySelector(".num-1");
 const btnTwo = document.querySelector(".num-2");
@@ -25,150 +27,172 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let inputValue = "";
-let value1;
-let value2;
+let currentValue = "";
+let value1 = "";
 let result;
 let operation;
+let delArr = null;
+
 const operate = function (operator, a, b) {
   if (operator === add) {
-    return add(a, b);
+    return Number(add(a, b).toFixed(10));
   } else if (operator === subtract) {
-    return subtract(a, b);
+    return Number(subtract(a, b).toFixed(10));
   } else if (operator === multiply) {
-    return multiply(a, b);
+    return Number(multiply(a, b).toFixed(10));
   } else if (operator === divide) {
-    return divide(a, b);
+    return Number(divide(a, b).toFixed(10));
   }
 };
 
 btnOne.addEventListener("click", function () {
-  inputValue += 1;
-  display.value = inputValue;
+  currentValue += 1;
+  display.value = currentValue;
 });
 
 btnTwo.addEventListener("click", function () {
-  inputValue += 2;
-  display.value = inputValue;
+  currentValue += 2;
+  display.value = currentValue;
 });
 btnThree.addEventListener("click", function () {
-  inputValue += 3;
-  display.value = inputValue;
+  currentValue += 3;
+  display.value = currentValue;
 });
 btnFour.addEventListener("click", function () {
-  inputValue += 4;
-  display.value = inputValue;
+  currentValue += 4;
+  display.value = currentValue;
 });
 btnFive.addEventListener("click", function () {
-  inputValue += 5;
-  display.value = inputValue;
+  currentValue += 5;
+  display.value = currentValue;
 });
 btnSix.addEventListener("click", function () {
-  inputValue += 6;
-  display.value = inputValue;
+  currentValue += 6;
+  display.value = currentValue;
 });
 btnSeven.addEventListener("click", function () {
-  inputValue += 7;
-  display.value = inputValue;
+  currentValue += 7;
+  display.value = currentValue;
 });
 btnEight.addEventListener("click", function () {
-  inputValue += 8;
-  display.value = inputValue;
+  currentValue += 8;
+  display.value = currentValue;
 });
 btnNine.addEventListener("click", function () {
-  inputValue += 9;
-  display.value = inputValue;
+  currentValue += 9;
+  display.value = currentValue;
 });
 btnZero.addEventListener("click", function () {
-  inputValue += 0;
-  display.value = inputValue;
+  currentValue += 0;
+  display.value = currentValue;
 });
 
+const opStatus = function () {
+  if (value1 && currentValue) {
+    return true;
+  } else {
+    console.log("no");
+    return false;
+  }
+};
+
 btnSubtract.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(inputValue));
+  result = operate(operation, Number(value1), Number(currentValue));
   if (result) {
     display.value = result;
-    value1 = result;
+    value1 === "" ? (value1 = result) : (value1 = value1);
   } else {
     display.value = "";
-    value1 = inputValue;
+    value1 === "" ? (value1 = currentValue) : (value1 = value1);
   }
-  inputValue = "";
-  //display.value = inputValue;
+  currentValue = "";
   operation = subtract;
 });
 
 btnMultiply.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(inputValue));
+  result = operate(operation, Number(value1), Number(currentValue));
   if (result || result === 0) {
     display.value = result;
-    value1 = result;
+    value1 === "" ? (value1 = result) : (value1 = value1);
   } else {
     display.value = "";
-    value1 = inputValue;
+    value1 === "" ? (value1 = currentValue) : (value1 = value1);
   }
-  inputValue = "";
-  // display.value = inputValue;
+  currentValue = "";
   operation = multiply;
 });
 
 btnDivide.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(inputValue));
+  result = operate(operation, Number(value1), Number(currentValue));
   if (result) {
     display.value = result;
-    value1 = result;
+    value1 === "" ? (value1 = result) : (value1 = value1);
   } else {
     display.value = "";
-    value1 = inputValue;
+    value1 === "" ? (value1 = currentValue) : (value1 = value1);
   }
-  inputValue = "";
-  //display.value = inputValue;
+  currentValue = "";
   operation = divide;
 });
+
 btnAdd.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(inputValue));
+  result = operate(operation, Number(value1), Number(currentValue));
   if (result) {
     display.value = result;
-    value1 = result;
+    value1 === "" ? (value1 = result) : (value1 = value1);
   } else {
     display.value = "";
-    value1 = inputValue;
+    value1 === "" ? (value1 = currentValue) : (value1 = value1);
   }
-  inputValue = "";
-  //display.value = inputValue;
+  currentValue = "";
   operation = add;
 });
 
 btnEquals.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(inputValue));
-  if (result) {
-    display.value = result;
-    value1 = result;
-  } else if (result === 0) {
-    display.value = value1;
-  } else {
-    display.value = inputValue;
+  if (opStatus()) {
+    result = operate(operation, Number(value1), Number(currentValue));
+    if (result === Infinity) {
+      display.value = "You can't do that";
+    } else if (result === 0) {
+      display.value = 0;
+    } else if (result) {
+      display.value = result;
+      value1 = result;
+    } else {
+      display.value = currentValue;
+    }
+    currentValue = "";
+    operation = "";
+    console.log(value1, currentValue);
   }
-  inputValue = "";
-  operation = "";
-  console.log(value1, inputValue);
 });
 
 btnAllClear.addEventListener("click", function () {
-  inputValue = "";
+  currentValue = "";
   value1 = "";
   display.value = "";
   operation = "";
   result = "";
+  delArr = null;
 });
 
 BtnDecimal.addEventListener("click", function () {
-  if (!inputValue.split("").includes(".")) {
-    inputValue += ".";
-    display.value = inputValue;
+  if (!currentValue.split("").includes(".")) {
+    currentValue += ".";
+    display.value = currentValue;
   }
 });
 
-// btnDel.addEventListener("click", function () {
-
-// });
+btnDel.addEventListener("click", function () {
+  if (currentValue) {
+    delArr = currentValue.split("");
+    delArr.pop();
+    currentValue = delArr.join("");
+    display.value = currentValue;
+  } else {
+    delArr = value1.toString().split("");
+    delArr.pop();
+    currentValue = delArr.join("");
+    display.value = currentValue;
+  }
+});
