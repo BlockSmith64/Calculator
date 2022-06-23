@@ -8,9 +8,14 @@ const btnSubtract = document.querySelector(".subtract");
 const btnMultiply = document.querySelector(".multiply");
 const btnDivide = document.querySelector(".divide");
 const btnEquals = document.querySelector(".equal");
-const btnAllClear = document.querySelector(".ac");
+const btnAllClear = document.querySelector(".AC");
 const btnDel = document.querySelector(".del");
 const BtnDecimal = document.querySelector(".decimal");
+
+window.addEventListener("keydown", function (e) {
+  const btn = document.querySelector(`button[data-key='${e.keyCode}']`);
+  btn.click();
+});
 
 //arithmetic functions
 const add = (a, b) => a + b;
@@ -55,7 +60,7 @@ const opStatus = function () {
 const operand = function () {
   result = operate(operation, Number(value1), Number(currentValue));
   if (result === Infinity) {
-    display.textContent = "You can't do that";
+    display.textContent = "does not compute";
   } else if (result) {
     display.textContent = result;
     value1 = result;
