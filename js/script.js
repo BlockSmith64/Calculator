@@ -1,8 +1,8 @@
 "use strict";
 
 //Button selectors
-const numBtns = document.querySelectorAll(".num");
-const display = document.querySelector("input");
+const numBtns = document.querySelectorAll(".num-btn");
+const display = document.querySelector(".display-screen");
 const btnAdd = document.querySelector(".add");
 const btnSubtract = document.querySelector(".subtract");
 const btnMultiply = document.querySelector(".multiply");
@@ -39,8 +39,7 @@ const operate = function (operator, a, b) {
 numBtns.forEach((btn) =>
   btn.addEventListener("click", function () {
     currentValue += btn.textContent;
-    display.value = currentValue;
-    console.log("yo");
+    display.textContent = currentValue;
   })
 );
 
@@ -53,72 +52,51 @@ const opStatus = function () {
   }
 };
 
-btnSubtract.addEventListener("click", function () {
+const operand = function () {
   result = operate(operation, Number(value1), Number(currentValue));
-  if (result) {
-    display.value = result;
-    value1 === "" ? (value1 = result) : (value1 = value1);
+  if (result === Infinity) {
+    display.textContent = "You can't do that";
+  } else if (result) {
+    display.textContent = result;
+    value1 = result;
   } else {
-    display.value = "";
+    display.textContent = "";
     value1 === "" ? (value1 = currentValue) : (value1 = value1);
   }
   currentValue = "";
-  operation = subtract;
+};
+
+btnSubtract.addEventListener("click", function () {
+  if (!operation !== subtract) {
+    operand();
+    operation = subtract;
+  }
 });
 
 btnMultiply.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(currentValue));
-  if (result || result === 0) {
-    display.value = result;
-    value1 === "" ? (value1 = result) : (value1 = value1);
-  } else {
-    display.value = "";
-    value1 === "" ? (value1 = currentValue) : (value1 = value1);
+  if (!operation !== multiply) {
+    operand();
+    operation = multiply;
   }
-  currentValue = "";
-  operation = multiply;
 });
 
 btnDivide.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(currentValue));
-  if (result) {
-    display.value = result;
-    value1 === "" ? (value1 = result) : (value1 = value1);
-  } else {
-    display.value = "";
-    value1 === "" ? (value1 = currentValue) : (value1 = value1);
+  if (operation !== divide) {
+    operand();
+    operation = divide;
   }
-  currentValue = "";
-  operation = divide;
 });
 
 btnAdd.addEventListener("click", function () {
-  result = operate(operation, Number(value1), Number(currentValue));
-  if (result) {
-    display.value = result;
-    value1 === "" ? (value1 = result) : (value1 = value1);
-  } else {
-    display.value = "";
-    value1 === "" ? (value1 = currentValue) : (value1 = value1);
+  if (operation !== add) {
+    operand();
+    operation = add;
   }
-  currentValue = "";
-  operation = add;
 });
 
 btnEquals.addEventListener("click", function () {
   if (opStatus()) {
-    result = operate(operation, Number(value1), Number(currentValue));
-    if (result === Infinity) {
-      display.value = "You can't do that";
-    } else if (result === 0) {
-      display.value = 0;
-    } else if (result) {
-      display.value = result;
-      value1 = result;
-    } else {
-      display.value = currentValue;
-    }
-    currentValue = "";
+    operand();
     operation = "";
     console.log(value1, currentValue);
   }
@@ -127,7 +105,7 @@ btnEquals.addEventListener("click", function () {
 btnAllClear.addEventListener("click", function () {
   currentValue = "";
   value1 = "";
-  display.value = "";
+  display.textContent = "";
   operation = "";
   result = "";
   delArr = null;
@@ -136,7 +114,7 @@ btnAllClear.addEventListener("click", function () {
 BtnDecimal.addEventListener("click", function () {
   if (!currentValue.split("").includes(".")) {
     currentValue += ".";
-    display.value = currentValue;
+    display.textContent = currentValue;
   }
 });
 
@@ -145,11 +123,14 @@ btnDel.addEventListener("click", function () {
     delArr = currentValue.split("");
     delArr.pop();
     currentValue = delArr.join("");
-    display.value = currentValue;
+    display.textContent = currentValue;
   } else {
     delArr = value1.toString().split("");
     delArr.pop();
-    currentValue = delArr.join("");
-    display.value = currentValue;
+    value1 = delArr.join("");
+    currentValue = value1;
+    value1 = "";
+    display.textContent = currentValue;
+    operation = "";
   }
 });
