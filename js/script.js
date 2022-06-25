@@ -9,7 +9,7 @@ const btnMultiply = document.querySelector(".multiply");
 const btnDivide = document.querySelector(".divide");
 const btnEquals = document.querySelector(".equal");
 const btnAllClear = document.querySelector(".AC");
-const btnDel = document.querySelector(".del");
+const btnDel = document.querySelector(".delete");
 const BtnDecimal = document.querySelector(".decimal");
 
 window.addEventListener("keydown", function (e) {
@@ -110,7 +110,7 @@ btnEquals.addEventListener("click", function () {
 btnAllClear.addEventListener("click", function () {
   currentValue = "";
   value1 = "";
-  display.textContent = "";
+  display.textContent = "0";
   operation = "";
   result = "";
   delArr = null;
