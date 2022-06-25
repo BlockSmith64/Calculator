@@ -1,25 +1,76 @@
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   justify-content: center;
+  align-content: center;
+  margin-top: 2.2em;
+  width: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+  border: 10px solid rgba(47, 47, 47, 1);
+  border-radius: 10px;
+}
+
+.display-screen {
+  background-color: #39c800;
+  color: black;
+  grid-column: 1 / 5;
+  font-size: 3.9em;
+  display: flex;
+  flex-direction: row-reverse;
   align-items: center;
-}
-.numbers {
-  display: flex;
-  flex-wrap: wrap;
-
-  width: 150px;
+  border: 5px solid #000;
 }
 
-.btns {
-  display: flex;
+.calculator {
+  position: relative;
+  min-height: 90vh;
+  background: #2f2f2f;
 }
 
-.btn {
-  width: 45px;
+.container .big {
+  grid-column: span 2;
 }
 
-.operator-btns {
-  display: flex;
-  flex-direction: column;
+.container .operator {
+  font-size: 2rem;
+  background: #128bea;
+}
+
+.operator:active {
+  background: #6aaee2;
+}
+.container button {
+  font-size: 2rem;
+  border: 5px solid rgba(47, 47, 47, 1);
+  color: #fff;
+  background: #09a6b2;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.container .func {
+  background-color: #ea6012;
+}
+
+.func:active {
+  background-color: #fa7d34;
+}
+
+.container .equal {
+  background: #c1c1c1;
+  color: #000;
+}
+
+.equal:active {
+  background: #8f8e8e;
+}
+
+.num-btn:active {
+  background-color: #33b9bd;
 }
